@@ -48,3 +48,25 @@ def daily_min(data):
     :returns: np.ndarray
     """
     return np.min(data, axis=0)
+
+
+def patient_normalise(data):
+    """Normalise patient data from a 2D inflammation data array.
+
+    NaN values are ignored and normalised to 0.
+
+    :param data: 2D numpy array with patients on rows and days on columns
+    :raises ValueError: in case data contains values below 0
+    :returns: np.ndarray, an array with the same shape as data, but values normalised
+    """
+
+    if np.any(data < 0):
+        raise ValueError('Inflammation values should not be negative')
+
+    max = np.nanmax(data, axis=1)
+    with np.errstate(invalid='ignore', divide='ignore'):
+        normalised = data / max[:, np.newaxis]
+
+    normalised[np.isnan(normalised)] = 0
+
+    return normalised
