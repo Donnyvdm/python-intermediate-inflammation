@@ -2,7 +2,6 @@
 
 from matplotlib import pyplot as plt
 
-
 def visualize(data_dict):
     """Display plots of basic statistical properties of the inflammation data.
 
