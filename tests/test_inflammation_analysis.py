@@ -3,7 +3,6 @@ import numpy as np
 import numpy.testing as npt
 from pathlib import Path
 import pytest
-import math
 
 from inflammation.models import CSVDataSource, analyse_data
 

@@ -10,29 +10,8 @@ import glob
 import os
 
 import numpy as np
-<<<<<<< HEAD
-
-
-def load_csv(filename):
-    """Load a Numpy array from a CSV
-
-    :param filename: Filename of CSV to load
-    :raises FileNotFoundError: raised if the filename cannot be found
-    :returns: 2D np.ndarray
-    """
-    return np.loadtxt(fname=filename, delimiter=',')
-||||||| 89ea1cd
-
-
-def load_csv(filename):  
-    """Load a Numpy array from a CSV
-
-    :param filename: Filename of CSV to load
-    """
-    return np.loadtxt(fname=filename, delimiter=',')
-=======
 import json
->>>>>>> full-data-analysis
+
 
 
 def daily_mean(data):
@@ -58,14 +37,11 @@ def daily_max(data):
 def daily_min(data):
     """Calculate the daily min of a 2D inflammation data array.
 
-<<<<<<< HEAD
     :param data: 2D-numpy array with patients on rows and days on columns
     :raises AxisError: raised if data is not an array
     :returns: np.ndarray
     """
     return np.min(data, axis=0)
-||||||| 89ea1cd
-=======
 
 class CSVDataSource:
 
@@ -140,4 +116,3 @@ def analyse_data(data_source):
     daily_standard_deviation = compute_stddev_by_day(data)
 
     return daily_standard_deviation
->>>>>>> full-data-analysis
