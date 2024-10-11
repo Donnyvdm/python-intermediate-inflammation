@@ -5,7 +5,7 @@ import argparse
 import os
 
 from inflammation import models, views
-from inflammation.compute_data import analyse_data
+from inflammation.models import CSVDataSource, JSONDataSource, analyse_data
 
 
 def main(args):
@@ -19,13 +19,27 @@ def main(args):
     if not isinstance(infiles, list):
         infiles = [args.infiles]
 
-
     if args.full_data_analysis:
-        analyse_data(os.path.dirname(infiles[0]))
+        data_dir = os.path.dirname(infiles[0])
+
+        if infiles[0].endswith('csv'):
+            data_source = CSVDataSource(data_dir)
+        elif infiles[0].endswith('json'):
+            data_source = JSONDataSource(data_dir)
+        else:
+            raise ValueError(f"Don't know how to load files of type {infiles[0]}")
+
+        data_result = analyse_data(data_source)
+        graph_data = {
+            'standard deviation by day': data_result,
+        }
+
+        views.visualize(graph_data)
+
         return
 
     for filename in infiles:
-        inflammation_data = models.load_csv(filename)
+        inflammation_data = models.CSVDataSource.load_csv(filename)
 
         view_data = {
             'average': models.daily_mean(inflammation_data),
