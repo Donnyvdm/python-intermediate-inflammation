@@ -1,6 +1,7 @@
 """Module containing code for plotting inflammation data."""
 
 from matplotlib import pyplot as plt
+import numpy as np
 
 
 def visualize(data_dict):
