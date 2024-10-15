@@ -1,5 +1,7 @@
 #!/usr/bin/env python3
-"""Software for managing and analysing patients' inflammation data in our imaginary hospital."""
+"""Software for managing and analysing patients' inflammation data in
+our imaginary hospital.
+"""
 
 import argparse
 
@@ -13,12 +15,11 @@ def main(args):
     - selecting the necessary models and views for the current task
     - passing data between models and views
     """
-    InFiles = args.infiles
-    if not isinstance(InFiles, list):
-        InFiles = [args.infiles]
+    input_files = args.infiles
+    if not isinstance(input_files, list):
+        input_files = [args.infiles]
 
-
-    for filename in InFiles:
+    for filename in input_files:
         inflammation_data = models.load_csv(filename)
 
         view_data = {
@@ -32,12 +33,14 @@ def main(args):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
-        description='A basic patient inflammation data management system')
+        description='A basic patient inflammation data management system'
+    )
 
     parser.add_argument(
         'infiles',
         nargs='+',
-        help='Input CSV(s) containing inflammation series for each patient')
+        help='Input CSV(s) containing inflammation series for each patient'
+    )
 
     args = parser.parse_args()
 
